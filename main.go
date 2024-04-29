@@ -39,6 +39,11 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(products)
+
+	err = DeleteProducts(db, product.ID)
+	if err != nil {
+		panic(err)
+	}
 }
 
 type Product struct {
@@ -114,4 +119,17 @@ func SelectProducts(db *sql.DB) ([]Product, error) {
 		allProduts = append(allProduts, p)
 	}
 	return allProduts, nil
+}
+
+func DeleteProducts(db *sql.DB, id string) error {
+	stmt, err := db.Prepare("DELETE FROM products WHERE id = ?")
+	if err != nil {
+		panic(err)
+	}
+	defer stmt.Close()
+	_, err = stmt.Exec(id)
+	if err != nil {
+		panic(err)
+	}
+	return nil
 }
