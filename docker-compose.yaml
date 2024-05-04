@@ -1,14 +1,14 @@
-version: '3'
+version: '3.8'
 
 services:
   mysql:
-    image: mysql:latest
-    container_name: mysql
+    image: duarty/gomysqlcrud
+    container_name: mysql_09123
     restart: always
     platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: gomysqlcrud
+      MYSQL_DATABASE: gocrud
       MYSQL_PASSWORD: root
     ports:
       - 3306:3306
